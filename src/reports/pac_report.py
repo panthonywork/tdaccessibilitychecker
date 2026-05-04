@@ -11,7 +11,7 @@ COLOUR_RED    = (0.83, 0.18, 0.18)
 COLOUR_GREY   = (0.55, 0.55, 0.55)
 COLOUR_DARK   = (0.10, 0.10, 0.10)
 COLOUR_BG     = (0.97, 0.97, 0.97)
-COLOUR_HEADER = (0.02, 0.30, 0.59)   # TD blue
+COLOUR_HEADER = (0.0, 0.42, 0.31)    # TD dark green #006B3F
 
 FONT_TITLE  = 16
 FONT_H2     = 12
