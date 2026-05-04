@@ -48,7 +48,7 @@ def render():
     # ── PAC PDF report download ───────────────────────────────────────────────
     st.divider()
     with st.spinner("Generating PAC-style PDF report…"):
-        report_bytes = build_pac_report(results, uploaded.name)
+        report_bytes = build_pac_report(results, uploaded.name, file_bytes)
 
     st.download_button(
         label="Download PAC Report (.pdf)",
