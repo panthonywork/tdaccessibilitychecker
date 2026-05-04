@@ -140,10 +140,10 @@ PAGES = {
     "Report History": history,
 }
 
-PAGE_NAMES = list(PAGES.keys())
+if "current_page" not in st.session_state:
+    st.session_state["current_page"] = "Home"
 
-if "page_index" not in st.session_state:
-    st.session_state["page_index"] = 0
+current = st.session_state["current_page"]
 
 with st.sidebar:
     st.markdown("""
@@ -153,11 +153,30 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
     st.divider()
-    selection = st.radio(
-        "Navigate", PAGE_NAMES,
-        index=st.session_state["page_index"],
-        label_visibility="collapsed",
-    )
-    st.session_state["page_index"] = PAGE_NAMES.index(selection)
+    for page_name in PAGES:
+        is_active = page_name == current
+        label = f"**{page_name}**" if is_active else page_name
+        if st.button(label, key=f"nav_{page_name}", use_container_width=True):
+            st.session_state["current_page"] = page_name
+            st.rerun()
 
-PAGES[selection].render()
+st.markdown("""
+<style>
+    /* Make sidebar nav buttons look like a nav list */
+    [data-testid="stSidebar"] .stButton > button {
+        background: transparent !important;
+        border: none !important;
+        color: #FFFFFF !important;
+        text-align: left !important;
+        padding: 0.4rem 0.75rem !important;
+        border-radius: 6px !important;
+        font-size: 0.9rem !important;
+        font-weight: 400 !important;
+    }
+    [data-testid="stSidebar"] .stButton > button:hover {
+        background: rgba(255,255,255,0.15) !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+PAGES[current].render()
