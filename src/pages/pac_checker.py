@@ -26,7 +26,7 @@ def render():
     with st.spinner("Running full Matterhorn Protocol check…"):
         results = check_pdf(file_bytes, uploaded.name)
 
-    save_report(uploaded.name, "pdf", results)
+    save_report(uploaded.name, "pdf", results, check_type="pac")
 
     # ── Summary ───────────────────────────────────────────────────────────────
     passed = sum(1 for r in results if r["status"] == "pass")

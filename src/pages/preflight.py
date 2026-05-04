@@ -43,7 +43,7 @@ def render():
             st.error("Unsupported file type.")
             return
 
-    save_report(uploaded.name, ext, results)
+    save_report(uploaded.name, ext, results, check_type="preflight")
 
     # ── Summary bar ──────────────────────────────────────────────────────────
     passed = sum(1 for r in results if r["status"] == "pass")
