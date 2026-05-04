@@ -23,7 +23,7 @@ def render():
         )
         st.markdown("**Accepts:** `.docx` `.pptx` `.pdf`")
         if st.button("Go to Pre-flight Checker →", use_container_width=True, type="primary"):
-            st.session_state["page"] = "Pre-flight Checker"
+            st.session_state["page_index"] = 1
             st.rerun()
 
     with col2:
@@ -34,7 +34,7 @@ def render():
         )
         st.markdown("**Accepts:** `.pdf` only")
         if st.button("Go to PAC Report Generator →", use_container_width=True):
-            st.session_state["page"] = "PAC Report Generator"
+            st.session_state["page_index"] = 2
             st.rerun()
 
     st.divider()

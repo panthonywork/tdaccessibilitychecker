@@ -140,6 +140,11 @@ PAGES = {
     "Report History": history,
 }
 
+PAGE_NAMES = list(PAGES.keys())
+
+if "page_index" not in st.session_state:
+    st.session_state["page_index"] = 0
+
 with st.sidebar:
     st.markdown("""
         <div style="padding: 0.5rem 0 0.25rem;">
@@ -148,6 +153,11 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
     st.divider()
-    selection = st.radio("Navigate", list(PAGES.keys()), label_visibility="collapsed")
+    selection = st.radio(
+        "Navigate", PAGE_NAMES,
+        index=st.session_state["page_index"],
+        label_visibility="collapsed",
+    )
+    st.session_state["page_index"] = PAGE_NAMES.index(selection)
 
 PAGES[selection].render()
