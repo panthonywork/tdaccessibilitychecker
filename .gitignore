@@ -1,0 +1,12 @@
+.DS_Store
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+*.db
+*.sqlite
+reports_history/
+.streamlit/secrets.toml
+assets/uploads/

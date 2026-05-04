@@ -1,0 +1,184 @@
+{
+  "version": "Matterhorn Protocol 1.1 / ISO 14289-1",
+  "groups": [
+    {
+      "id": "01",
+      "name": "File Trailer",
+      "checkpoints": [
+        {
+          "id": "01-001",
+          "description": "The file trailer does not contain a Catalog dictionary.",
+          "plain_english": "The PDF is missing its core catalog — the document is structurally broken.",
+          "fix_hint": "Re-export the PDF from the source application. The file may be corrupted.",
+          "applies_to": ["pdf"]
+        },
+        {
+          "id": "01-002",
+          "description": "The Catalog dictionary does not contain a MarkInfo dictionary with Marked set to true.",
+          "plain_english": "The PDF is not marked as a Tagged PDF, which is required for accessibility.",
+          "fix_hint": "In Word: File → Save As → PDF → Options → check 'Document structure tags for accessibility'. In Acrobat: Tools → Accessibility → Autotag Document.",
+          "applies_to": ["pdf"]
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "name": "Page Header",
+      "checkpoints": [
+        {
+          "id": "02-001",
+          "description": "The document does not contain a page header.",
+          "plain_english": "One or more pages are missing a proper page structure header in the PDF tag tree.",
+          "fix_hint": "Re-export from Word or PowerPoint with accessibility tags enabled. Check that all pages are properly structured.",
+          "applies_to": ["pdf"]
+        }
+      ]
+    },
+    {
+      "id": "06",
+      "name": "Document Title",
+      "checkpoints": [
+        {
+          "id": "06-001",
+          "description": "The document title is missing from XMP metadata.",
+          "plain_english": "The document does not have a title set in its properties.",
+          "fix_hint": "In Word: File → Properties → Summary tab → fill in 'Title'. In PowerPoint: File → Info → Properties → Title.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        },
+        {
+          "id": "06-002",
+          "description": "ViewerPreferences dictionary does not contain DisplayDocTitle set to true.",
+          "plain_english": "The PDF is not configured to display the document title in the viewer window title bar.",
+          "fix_hint": "In Acrobat: File → Properties → Initial View → Show → Document Title. Re-export from Word with full accessibility settings.",
+          "applies_to": ["pdf"]
+        }
+      ]
+    },
+    {
+      "id": "07",
+      "name": "Natural Language",
+      "checkpoints": [
+        {
+          "id": "07-001",
+          "description": "The document language is not specified.",
+          "plain_english": "The document has no language declared. Screen readers will not know what language to use.",
+          "fix_hint": "In Word: File → Language → Set Proofing Language → select 'English (Canada)'. In PowerPoint: Review → Language → Set Proofing Language.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        },
+        {
+          "id": "07-002",
+          "description": "Actual text or text content cannot be mapped to Unicode.",
+          "plain_english": "Some text in the document cannot be read by assistive technology.",
+          "fix_hint": "Avoid using special symbol fonts (Wingdings, etc.). Replace with standard Unicode characters.",
+          "applies_to": ["pdf"]
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "name": "Headings",
+      "checkpoints": [
+        {
+          "id": "13-001",
+          "description": "Headings are not tagged with the correct heading level tags.",
+          "plain_english": "Text that looks like a heading is not marked up as a heading in the document structure.",
+          "fix_hint": "In Word: Apply built-in Heading styles (Heading 1, Heading 2, etc.) instead of just making text bold or large.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        },
+        {
+          "id": "13-004",
+          "description": "Heading levels are skipped (e.g. H1 followed by H3).",
+          "plain_english": "Heading levels jump (for example, going from Heading 1 directly to Heading 3 without a Heading 2 in between).",
+          "fix_hint": "Review all headings and ensure they follow a logical hierarchy: H1 → H2 → H3 without skipping levels.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "name": "Tables",
+      "checkpoints": [
+        {
+          "id": "14-001",
+          "description": "Table header cells are not tagged as TH.",
+          "plain_english": "The table has no column or row headers marked up — screen readers will read all cells the same way.",
+          "fix_hint": "In Word: select the header row → Table Design → check 'Header Row'. Ensure the table has a proper first row header.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        },
+        {
+          "id": "14-003",
+          "description": "Table is missing a summary or caption.",
+          "plain_english": "The table has no title or description to explain what it contains to someone using a screen reader.",
+          "fix_hint": "Add a caption above the table. In Word: right-click table → Insert Caption.",
+          "applies_to": ["pdf", "docx"]
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "name": "Lists",
+      "checkpoints": [
+        {
+          "id": "15-001",
+          "description": "List items are not tagged as list elements.",
+          "plain_english": "Bullet points or numbered lists are formatted visually but not marked up as actual lists in the document structure.",
+          "fix_hint": "Use Word's built-in list styles (Home → Bullets or Numbering) instead of manually typed dashes or numbers.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "name": "Alternative Descriptions",
+      "checkpoints": [
+        {
+          "id": "17-001",
+          "description": "Figures are not tagged with an Alt attribute.",
+          "plain_english": "Images and graphics in the document are missing alternative text descriptions.",
+          "fix_hint": "In Word: right-click each image → Edit Alt Text → write a description. Mark decorative images as decorative.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        },
+        {
+          "id": "17-002",
+          "description": "An Artifact is tagged as a Figure without an Alt attribute.",
+          "plain_english": "A decorative image is incorrectly tagged as meaningful content, but has no alt text.",
+          "fix_hint": "Mark purely decorative images as 'Decorative' in the alt text panel — do not leave the alt text blank on tagged figures.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "name": "Colour and Contrast",
+      "checkpoints": [
+        {
+          "id": "20-001",
+          "description": "Colour is used as the only visual means of conveying information.",
+          "plain_english": "Information is communicated only through colour (e.g. 'items in red are errors') without any other indicator.",
+          "fix_hint": "Add a text label, pattern, or icon alongside any colour-coded information.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        }
+      ]
+    },
+    {
+      "id": "28",
+      "name": "Links and Navigation",
+      "checkpoints": [
+        {
+          "id": "28-001",
+          "description": "Link annotations are not properly tagged.",
+          "plain_english": "Hyperlinks in the document are not accessible to screen readers.",
+          "fix_hint": "Use proper hyperlink insertion (Insert → Link) rather than pasting raw URLs. Ensure link text is descriptive.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        },
+        {
+          "id": "28-002",
+          "description": "Link text is not descriptive.",
+          "plain_english": "Links use generic text like 'click here' or 'read more' which gives no context to screen reader users.",
+          "fix_hint": "Replace generic link text with a description of the destination, e.g. '2024 TD Accessibility Report (PDF)'.",
+          "applies_to": ["pdf", "docx", "pptx"]
+        }
+      ]
+    }
+  ]
+}
